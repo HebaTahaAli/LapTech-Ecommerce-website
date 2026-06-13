@@ -1,0 +1,123 @@
+:root {
+  --main-color: #023e8a;
+  --second-color: #0077b6;
+  --third-color: #0096c7;
+  --white-color: #fff;
+  --black-color: #000;
+  --bg-color: #f7f9f9;
+  --border-color: #ccdbdc;
+  --p-color: #7b7b7b;
+}
+
+.item-details {
+  padding: 50px 0;
+}
+.item-details .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.item-details .images-item {
+  width: 40%;
+}
+.item-details .images-item .sm-imgs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.item-details .images-item .sm-imgs img {
+    width: auto;
+    height: 150px;
+}
+.item-details .images-item .sm-imgs .sm-img-content{
+ width: 24%;
+   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.item-details .images-item .big-img img{
+    width: auto;
+    height: 350px;
+    object-fit: cover;
+}
+.item-details .images-item .big-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.item-details .details-items{
+    width: 58%;
+}
+.item-details .details-items h1{
+    margin-bottom: 30px;
+    color: var(--main-color);
+}
+.item-details .details-items .stars{
+    margin: 15px 0;
+    display: flex;
+    gap: 5px;
+   color: rgb(236, 236, 10);
+    font-size:18px ;
+}
+.item-details .details-items .price{
+    font-size: 22px;
+    margin:20px 0;
+}
+.item-details .details-items h5{
+    font-weight: 500;
+    font-size: 16px;
+    margin:20px 0;
+}
+.item-details .details-items .desc{
+    line-height: 1.5;
+}
+.item-details .details-items .stock{
+    font-size: 20px;
+    margin-top: 20px;
+}
+.item-details .details-items .btn{
+    font-size: 16px;
+    border-radius: 2px;
+    padding: 12px 15px;
+    margin-bottom: 30px;
+}
+.item-details .details-items .btn svg{
+    font-size: 20px;
+}
+.item-details .details-items .icons{
+ display: flex;
+ margin: 20px 0;
+ transform: translateY(-50%);
+ gap: 10px;
+ transition: 0.3s;
+}
+.item-details .details-items .icons span{
+    width: 40px;
+    height: 40px;
+    background-color:var(--border-color) ;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.item-details .details-items .icons span:hover{
+    background-color:var(--main-color) ;
+}
+.item-details .details-items svg:hover{
+    fill:var(--white-color) ;
+}
+.loading-item .item-details .images-item{
+    height: 650px;
+}
+.loading-item .item-details .details-items{
+    height: 600px;
+    padding-top: 100px;
+
+}
+.loading-item .item-details h5{
+    margin-bottom: 50px;
+    height: 30px;
+}
