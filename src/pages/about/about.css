@@ -90,7 +90,7 @@ h3 {
   text-align: center;
   background:
     linear-gradient(rgba(1, 45, 102, 0.614), rgba(2, 61, 138, 0.696)),
-    url(/public/img/about2.jpg);
+    url(/img/about2.jpg);
   background-size: cover;
   background-position: center;
   padding: 100px 20px;

@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import Logo from "../../../public/img/logo.png"
+import Logo from "/img/logo.png"
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { MdFavoriteBorder } from "react-icons/md";
 import "./header.css";
@@ -14,22 +14,22 @@ function TopHeader() {
       <div className="top-header">
         <div className="container">
           <Link to="/" className="logo"><img src={Logo} alt="logo" /></Link>
-            <SearchBox/>   
+          <SearchBox />
 
           <div className="header-icons">
-           <Link to="/cart">
-                <div className="icon">
-              <MdOutlineShoppingCart />
-              <span className="count">{cartItems.length}</span>
-            </div>
-           </Link>
+            <Link to="/cart">
+              <div className="icon">
+                <MdOutlineShoppingCart />
+                <span className="count">{cartItems.length}</span>
+              </div>
+            </Link>
 
-           <Link to="/favorites">
-            <div className="icon">
-              <MdFavoriteBorder />
-              <span className="count">{favItems.length}</span>
-            </div>
-           </Link>
+            <Link to="/favorites">
+              <div className="icon">
+                <MdFavoriteBorder />
+                <span className="count">{favItems.length}</span>
+              </div>
+            </Link>
           </div>
 
 
