@@ -43,7 +43,7 @@ function About() {
         <div className="about">
             <div className="container">
                 <div className="about-hero">
-                    <img src="/src/img/about-cover.jpg" alt="our-store" />
+                    <img src="/public/img/about-cover.jpg" alt="our-store" />
                     <div className="description">
                         <h2>About Our Store</h2>
                         <p>We bring together technology, <br/>beauty, and everyday essentials in one trusted shopping destination.</p>
@@ -53,7 +53,7 @@ function About() {
                     </div>
                 </div>
                 <div className="about-story">
-                    <img src="/src/img/about-store.jpg" alt="our-store" />
+                    <img src="/public/img/about-store.jpg" alt="our-store" />
                     <div className="description">
                         <h2>Our Story</h2>
                         <p>Our journey started with a simple goal:

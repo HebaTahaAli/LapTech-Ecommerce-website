@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import Logo from "../../img/logo.png"
+import Logo from "../../../public/img/logo.png"
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { MdFavoriteBorder } from "react-icons/md";
 import "./header.css";

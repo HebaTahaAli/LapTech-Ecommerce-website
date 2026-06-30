@@ -32,7 +32,7 @@ export default function HeroSection() {
                             <Link to="/" className='btn'> Shop Now </Link>
                         </div>
 
-                        <img src='/src/img/banner_Hero1.jpg' alt='slide bar' />
+                        <img src='/public/img/banner_Hero1.jpg' alt='slide bar' />
 
                     </SwiperSlide>
                     <SwiperSlide>
@@ -43,7 +43,7 @@ export default function HeroSection() {
                             <Link to="/" className='btn'> Shop Now </Link>
                         </div>
 
-                        <img src='/src/img/banner_Hero2.jpg' alt='slide bar' />
+                        <img src='/public/img/banner_Hero2.jpg' alt='slide bar' />
 
                     </SwiperSlide>
                     <SwiperSlide>
@@ -54,7 +54,7 @@ export default function HeroSection() {
                             <Link to="/" className='btn'> Shop Now </Link>
                         </div>
 
-                        <img src='/src/img/banner_Hero3.jpg' alt='slide bar' />
+                        <img src='/public/img/banner_Hero3.jpg' alt='slide bar' />
 
                     </SwiperSlide>
 
