@@ -20,7 +20,7 @@
 body{
     background-color: var(--white-color);
     font-family:"Inter", sans-serif; 
-    padding-top: 150px;
+    padding-top: 0px;
 }
 h1,h2,h3,h4,h5,h6{
     color: var(--black-color);
@@ -28,6 +28,7 @@ h1,h2,h3,h4,h5,h6{
 }
 il, a{
     text-decoration: none;
+    list-style: none;
 }
 input,textarea,button,select{
     outline: none;
@@ -65,5 +66,33 @@ img{
     to{
         background-position: right -40px top 0;
     }
+}
+
+.toast-wrapper{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    min-width: 300px;
+    max-width: 300px;
+}
+.toast-wrapper .toast-img img{
+    width: auto;
+    height: 50px;
+}
+.toast-wrapper .toast-content{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 10px;
+}
+.toast-wrapper .toast-content strong{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+.toast-wrapper .toast-content button{
+    font-size: 12px;
 }
 

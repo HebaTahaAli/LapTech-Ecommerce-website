@@ -1,120 +1,112 @@
 import { useEffect, useState } from "react";
-import { FaRegStarHalfStroke } from "react-icons/fa6";
-import { IoStarSharp, IoCartOutline } from "react-icons/io5";
 import { useParams } from "react-router-dom";
 import "./productDetails.css";
-import { FaHeart, FaShare } from "react-icons/fa";
 import SlideProduct from "../../component/slideProducts/SlideProduct";
 import Loading from "./Loading";
 import SlideProductLoading from "../../component/slideProducts/SlideProductLoading";
+import ProductDetailsImages from "./ProductDetailsImages";
+import ProductDetailsInfo from "./ProductDetailsInfo";
+import PageTransition from "../../component/PageTransition";
 
 export default function ProductDetails() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [detailsLoading, setDetailsLoading] = useState(true);
+
+  const [relatedProduct, setRelatedProduct] = useState([]);
+
   const { id } = useParams();
-  console.log(id);
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`https://dummyjson.com/products/${id}`);
+        setLoading(true);
+
+        const res = await fetch(
+          `https://dummyjson.com/products/${id}`
+        );
+
+        if (!res.ok) {
+          setProduct(null);
+          return;
+        }
+
         const data = await res.json();
+
+        // لو المنتج غير موجود
+        if (data.message) {
+          setProduct(null);
+          return;
+        }
+
         setProduct(data);
-        setLoading(false);
       } catch (error) {
-        console.log("fetch product ", error);
+        console.log("fetch product error:", error);
+        setProduct(null);
       } finally {
         setLoading(false);
       }
     };
+
     fetchProduct();
   }, [id]);
 
-  const [detailsLoading, setDetailsLoading] = useState(true);
-  const [relatedProduct, setRelatedProduct] = useState([]);
   useEffect(() => {
-    if (!product) return;
-    fetch(`https://dummyjson.com/products/category/${product.category}`)
-      .then((res) => res.json())
+    if (!product?.category) return;
+
+    setDetailsLoading(true);
+
+    fetch(
+      `https://dummyjson.com/products/category/${product.category}`
+    )
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to fetch related products");
+        }
+
+        return res.json();
+      })
       .then((data) => {
-        setRelatedProduct(data.products);
+        setRelatedProduct(data.products || []);
       })
       .catch((error) => {
-        console.log("fetch error", error);
+        console.log("fetch related products error:", error);
       })
       .finally(() => {
         setDetailsLoading(false);
       });
   }, [product?.category]);
 
-  console.log(relatedProduct);
-
-  console.log(product);
-
-  if (loading) return <Loading/>;
-  if (!product) return <p>Not Found...</p>;
   return (
-  
-    <div>
-      <div className="item-details">
-        <div className="container">
-          <div className="images-item">
-            <div className="big-img">
-              <img id="big-img" src={product.images[0]} alt={product.title} />
-            </div>
-             <div className="sm-imgs">
-              {product.images.map((img, index) => (
-           <div className="sm-img-content" key={index}>
-                <img
-                  
-                  src={img}
-                  alt={product.title}
-                  onClick={() => (document.getElementById("big-img").src = img)}
-                />
+    <PageTransition key={id}>
+      <div>
+        {loading ? (
+          <Loading />
+        ) : !product ? (
+          <div className="container">
+            <h2>Product Not Found</h2>
+          </div>
+        ) : (
+          <>
+            <div className="item-details">
+              <div className="container">
+                <ProductDetailsImages product={product} />
+                <ProductDetailsInfo product={product} />
               </div>
-              ))}
             </div>
-          </div>
-          <div className="details-items">
-            <h1>{product.title}</h1>
-            <div className="stars">
-              <IoStarSharp />
-              <IoStarSharp />
-              <IoStarSharp />
-              <IoStarSharp />
-              <FaRegStarHalfStroke />
-            </div>
-            <p className="desc">{product.description}</p>
-            <span>{product.availabilityStatus}</span>
-            <h5 className="stock">
-              Hurry Up! Only <span>{product.stock}</span> products left in
-              stock.
-            </h5>
-            <button className="btn">
-              Add to card
-              <IoCartOutline />
-            </button>
-            <div className="icons">
-              <span>
-                <FaHeart />
-              </span>
-              <span>
-                {" "}
-                <FaShare />
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      {detailsLoading ? (
-       <SlideProductLoading/>
-      ) : (
-        <SlideProduct
-          key={product.category}
-          title={product.category}
-          data={relatedProduct}
-        />
-      )}
-    </div>
+            {detailsLoading ? (
+              <SlideProductLoading />
+            ) : (
+              <SlideProduct
+                key={product.category}
+                title={product.category}
+                data={relatedProduct}
+              />
+            )}
+          </>
+        )}
+      </div>
+    </PageTransition>
   );
 }

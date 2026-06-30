@@ -1,0 +1,195 @@
+:root {
+  --main-color: #023e8a;
+  --second-color: #0077b6;
+  --third-color: #0096c7;
+  --white-color: #fff;
+  --black-color: #000;
+  --bg-color: #f7f9f9;
+  --border-color: #ccdbdc;
+  --p-color: #7b7b7b;
+}
+.about .about-hero,
+.about .about-story {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+  background-color: hsl(187, 18%, 91%);
+  padding: 20px;
+  border-radius: 5px;
+  gap: 20px;
+}
+.about .about-hero img,
+.about .about-story img {
+  width: 30%;
+  height: auto;
+  border-radius: 10px;
+  transition: 0.3s ease;
+}
+.about .about-hero img:hover,
+.about .about-story img:hover {
+  opacity: 0.9;
+}
+.about .about-hero .description {
+  text-align: center;
+  margin: auto;
+  line-height: 1.5;
+}
+.about-hero .description .btn,
+.about-action .btn {
+  display: inline;
+  margin-top: 10px;
+}
+.about .about-story .description {
+  line-height: 1.7;
+}
+.about .about-story {
+  background-color: #f6f8fab8;
+}
+.about h2,
+h3 {
+  color: var(--main-color);
+  text-align: center;
+}
+.about .about-info p.cta-desc,
+.about-action p {
+  line-height: 1.7;
+  margin: 16px 0;
+  text-align: center;
+}
+.about .about-card {
+  width: 100%;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  align-content: center;
+  margin: 24px 0;
+  gap: 30px;
+}
+.about .about-card > div {
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+  background-color: rgb(239, 242, 246);
+  margin-bottom: 20px;
+  padding: 16px 24px;
+  text-align: center;
+  line-height: 1.9;
+  transition: 0.3s ease;
+}
+.about .about-card > div svg {
+  font-size: 30px;
+}
+.about .about-card > div:hover {
+  opacity: 0.8;
+  transform: translateY(-5px);
+}
+.about-action {
+  text-align: center;
+  background:
+    linear-gradient(rgba(1, 45, 102, 0.614), rgba(2, 61, 138, 0.696)),
+    url(/src/img/about2.jpg);
+  background-size: cover;
+  background-position: center;
+  padding: 100px 20px;
+  border-radius: 25px;
+  margin-top: 20px;
+}
+.about .about-action p,
+.about-action h2 {
+  color: var(--white-color) !important;
+}
+/* ================== Tablet ================== */
+
+@media (max-width: 992px) {
+
+  .about .about-hero,
+  .about .about-story {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about .about-hero img,
+  .about .about-story img {
+    width: 70%;
+  }
+
+  .about .about-card {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-action {
+    padding: 80px 20px;
+  }
+}
+
+/* ================== Mobile ================== */
+
+@media (max-width: 768px) {
+
+  .about .about-hero,
+  .about .about-story {
+    padding: 15px;
+  }
+
+  .about .about-hero img,
+  .about .about-story img {
+    width: 100%;
+  }
+
+  .about .about-card {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .about .about-card > div {
+    width: 100%;
+  }
+
+  .about h2 {
+    font-size: 28px;
+  }
+
+  .about .about-hero .description,
+  .about .about-story .description {
+    line-height: 1.8;
+  }
+
+  .about-action {
+    padding: 60px 15px;
+    border-radius: 15px;
+  }
+}
+
+/* ================== Small Mobile ================== */
+
+@media (max-width: 480px) {
+
+  .about h2 {
+    font-size: 24px;
+  }
+
+  .about p {
+    font-size: 14px;
+  }
+
+  .about .about-card > div {
+    padding: 15px;
+  }
+
+  .about .about-card > div svg {
+    font-size: 26px;
+  }
+
+  .about-action {
+    padding: 50px 10px;
+  }
+
+  .about-action .btn,
+  .about-hero .description .btn {
+    width: 100%;
+    display: block;
+  }
+}

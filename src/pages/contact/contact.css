@@ -1,0 +1,140 @@
+.contact-page {
+  padding: 50px 0 80px;
+}
+
+.contact-hero {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.contact-hero h1 {
+  font-size: 42px;
+  color: var(--main-color);
+  margin-bottom: 10px;
+}
+.contact-hero p {
+  max-width: 600px;
+  margin: auto;
+  line-height: 1.8;
+}
+.contact-page .container {
+  display: flex;
+  flex-direction: column;
+}
+.contact-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-bottom: 50px;
+}
+.contact-info-item {
+  background: var(--white-color);
+  border: 1px solid var(--border-color);
+  border-radius: 15px;
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: 0.3s;
+}
+.contact-info-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+.contact-info-item svg {
+  font-size: 32px;
+  color: var(--main-color);
+}
+.contact-info-item h4 {
+  margin-bottom: 5px;
+}
+.contact-info-item p {
+  font-size: 14px;
+}
+.contact-form {
+  max-width: 800px;
+  width: 100%;
+  margin: auto;
+}
+.contact-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: var(--white-color);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 35px;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 15px;
+  transition: 0.3s;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--main-color);
+}
+.contact-form textarea {
+  min-height: 180px;
+  resize: none;
+}
+.contact-form button {
+  background: var(--main-color);
+  color: var(--white-color);
+  padding: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+.contact-form button:hover {
+  background: var(--second-color);
+}
+@media (max-width: 992px) {
+  .contact-info {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contact-hero h1 {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-info {
+    grid-template-columns: 1fr;
+  }
+  .contact-info-item {
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+  }
+
+  .contact-form form {
+    padding: 25px;
+  }
+
+  .contact-hero h1 {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 576px) {
+  .contact-page {
+    padding: 30px 0 60px;
+  }
+
+  .contact-form form {
+    padding: 20px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    padding: 12px;
+  }
+}

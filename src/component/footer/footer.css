@@ -1,0 +1,152 @@
+footer {
+  background: linear-gradient(
+    135deg,
+    var(--main-color),
+    var(--second-color)
+  );
+  color: var(--white-color);
+  margin-top: 40px;
+}
+
+footer .container {
+  max-width: 1300px;
+  margin: auto;
+  padding: 60px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 40px;
+}
+
+/* Logo Section */
+
+.footer-logo img {
+  width: auto;
+  height: 120px;
+  margin-bottom: 15px;
+}
+
+.footer-logo p {
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+/* Titles */
+
+footer h3 {
+  color: white;
+  margin-bottom: 25px;
+  position: relative;
+  width: fit-content;
+}
+
+footer h3::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 40px;
+  height: 3px;
+  background-color: var(--third-color);
+  border-radius: 10px;
+}
+
+/* Links */
+
+.footer-links ul {
+  list-style: none;
+}
+
+.footer-links ul li {
+  margin-bottom: 14px;
+}
+
+.footer-links ul li a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.85);
+  transition: 0.3s;
+}
+
+.footer-links ul li a:hover {
+  color: white;
+  padding-left: 8px;
+}
+
+/* Contact */
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.contact-item svg {
+  font-size: 18px;
+  color: white;
+}
+
+.contact-item span {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Social */
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.social-icons svg {
+  width: 42px;
+  height: 42px;
+  padding: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.social-icons svg:hover {
+  transform: translateY(-5px);
+  background-color: var(--third-color);
+}
+
+/* Bottom */
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 20px;
+  text-align: center;
+}
+
+.footer-bottom p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  footer .container {
+    text-align: center;
+  }
+
+  footer h3 {
+    margin-inline: auto;
+  }
+
+  footer h3::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .contact-item {
+    justify-content: center;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+}

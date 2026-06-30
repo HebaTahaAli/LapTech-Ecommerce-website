@@ -1,24 +1,20 @@
 import { Link } from "react-router";
-import { FaSearch } from "react-icons/fa";
 import Logo from "../../img/logo.png"
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { MdFavoriteBorder } from "react-icons/md";
 import "./header.css";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import SearchBox from "./SearchBox";
 
 function TopHeader() {
-  const { cartItems } = useContext(CartContext)
+  const { cartItems, favItems } = useContext(CartContext)
   return (
     <>
       <div className="top-header">
         <div className="container">
           <Link to="/" className="logo"><img src={Logo} alt="logo" /></Link>
-
-          <form action="" className="search-box">
-            <input type="text" name="search" id="search" placeholder="Search for products" />
-            <button type="submit"> <FaSearch /></button>
-          </form>
+            <SearchBox/>   
 
           <div className="header-icons">
            <Link to="/cart">
@@ -28,10 +24,12 @@ function TopHeader() {
             </div>
            </Link>
 
+           <Link to="/favorites">
             <div className="icon">
               <MdFavoriteBorder />
-              <span className="count">0</span>
+              <span className="count">{favItems.length}</span>
             </div>
+           </Link>
           </div>
 
 
