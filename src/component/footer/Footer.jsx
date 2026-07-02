@@ -13,7 +13,7 @@ function Footer() {
       <div className="container">
 
         <div className="footer-logo">
-          <img src="/src/img/logo-white.png" alt="LabTech Logo" />
+          <img src="/img/logo-white.png" alt="LabTech Logo" />
           <p>
             Providing high-quality laboratory equipment and medical supplies
             with reliability, innovation, and excellent customer service.
