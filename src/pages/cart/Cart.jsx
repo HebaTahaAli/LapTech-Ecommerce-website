@@ -3,6 +3,7 @@ import { CartContext } from "../../component/context/CartContext";
 import { FaRegTrashAlt } from "react-icons/fa";
 import "./cart.css";
 import PageTransition from "../../component/PageTransition";
+import { Link } from 'react-router-dom';
 
 export default function Cart() {
   const { cartItems, increaseFunc, decreaseFunc, removeFromCart } = useContext(CartContext);
@@ -47,7 +48,9 @@ export default function Cart() {
               <span className="total-checkout">$ {total.toFixed(2)}</span>
             </div>
             <div className="btn-div">
-              <button type="submit"> Place Order</button>
+              <Link to="/checkout" className="btn">
+    Checkout
+</Link>
             </div>
           </div>
         </div>

@@ -4,7 +4,7 @@ export const AuthProvider = createContext();
 
 export default function AuthContext({ children }) {
   const [user, setUser] = useState(null);
-
+  const isAuthenticated = !!user;
  
   useEffect(() => {
     const currentUser = JSON.parse(localStorage.getItem("user"));
@@ -64,7 +64,7 @@ export default function AuthContext({ children }) {
       JSON.stringify(users)
     );
 
-    // تسجيل الدخول مباشرة بعد إنشاء الحساب
+    
     setUser(newUser);
     localStorage.setItem(
       "user",
@@ -88,7 +88,35 @@ export default function AuthContext({ children }) {
       message: "Logout Successfully",
     };
   };
+const updateProfile = (data) => {
 
+  const updatedUser = {
+    ...user,
+    ...data,
+  };
+
+  setUser(updatedUser);
+
+  localStorage.setItem(
+    "user",
+    JSON.stringify(updatedUser)
+  );
+
+  const users =
+    JSON.parse(localStorage.getItem("users")) || [];
+
+  const updatedUsers = users.map((item) =>
+    item.email === updatedUser.email
+      ? updatedUser
+      : item
+  );
+
+  localStorage.setItem(
+    "users",
+    JSON.stringify(updatedUsers)
+  );
+
+};
   return (
     <AuthProvider.Provider
       value={{
@@ -96,6 +124,8 @@ export default function AuthContext({ children }) {
         login,
         register,
         logout,
+        updateProfile,
+        isAuthenticated,
       }}
     >
       {children}

@@ -54,9 +54,14 @@ export default function CartProvider({ children }) {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
+const clearCart = () => {
+  setCartItems([]);
+  localStorage.removeItem("cartItems");
+};
+
   return (
     <CartContext.Provider
-      value={{ cartItems, addCart, increaseFunc, decreaseFunc, removeFromCart, addFav, favItems, removeFavItem}}
+      value={{ cartItems, addCart, increaseFunc, decreaseFunc, removeFromCart, addFav, favItems, removeFavItem, clearCart}}
     >
       {children}
     </CartContext.Provider>

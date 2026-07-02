@@ -1,89 +1,175 @@
+import { useContext, useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
 import { TiThMenu } from "react-icons/ti";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
-import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
 import { PiSignInBold } from "react-icons/pi";
 import { FaUserPlus } from "react-icons/fa";
-import { useContext } from "react";
-import { AuthProvider} from "../context/AuthContext";
 import { HiOutlineUserCircle } from "react-icons/hi2";
 import { FiLogOut } from "react-icons/fi";
 
+import toast from "react-hot-toast";
+import { AuthProvider } from "../context/AuthContext";
 
 const navLinks = [
-  { title: "Home", link: "/" },
-  { title: "About", link: "/about" },
-  { title: "Products", link: "/allProducts" },
-  { title: "Contact", link: "/contact" },
+  {
+    title: "Home",
+    link: "/",
+  },
+  {
+    title: "About",
+    link: "/about",
+  },
+  {
+    title: "Products",
+    link: "/allProducts",
+  },
+  {
+    title: "Contact",
+    link: "/contact",
+  },
 ];
 
-function BtmHeader() {
-  const [categories, setCategories] = useState([]);
-  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user, logout } = useContext(AuthProvider);
+export default function BtmHeader() {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const { user, logout } = useContext(AuthProvider);
+
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+
+  // ===============================
+  // Close Menu After Navigation
+  // ===============================
 
   useEffect(() => {
     setIsMenuOpen(false);
     setIsCategoryOpen(false);
   }, [location]);
 
+  // ===============================
+  // Fetch Categories
+  // ===============================
+
   useEffect(() => {
-    fetch("https://dummyjson.com/products/categories")
-      .then((res) => res.json())
-      .then((data) => setCategories(data))
-      .catch((error) => console.log(error));
+    async function getCategories() {
+      try {
+        const res = await fetch(
+          "https://dummyjson.com/products/categories"
+        );
+
+        const data = await res.json();
+
+        setCategories(data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    getCategories();
   }, []);
+
+  // ===============================
+  // Functions
+  // ===============================
+
+  function closeMenus() {
+    setIsMenuOpen(false);
+    setIsCategoryOpen(false);
+  }
+
+  function toggleMenu() {
+    setIsMenuOpen((prev) => !prev);
+  }
+
+  function toggleCategories() {
+    setIsCategoryOpen((prev) => !prev);
+  }
+
+  function handleLogout() {
+    logout();
+
+    toast.success("Logged out Successfully");
+
+    closeMenus();
+
+    navigate("/");
+  }
+
+  // ===============================
+  // JSX
+  // ===============================
 
   return (
     <div className="btm-header">
       <div className="container">
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu */}
+
         <button
           className="mobile-menu-btn"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          onClick={toggleMenu}
         >
-          {isMenuOpen ? <IoClose /> : <HiOutlineMenuAlt3 />}
+          {isMenuOpen ? (
+            <IoClose />
+          ) : (
+            <HiOutlineMenuAlt3 />
+          )}
         </button>
+
+        {/* Navigation */}
 
         <nav className={`nav ${isMenuOpen ? "active" : ""}`}>
 
-         
+          {/* Categories */}
+
           <div className="category-nav">
-            <div
+
+            <button
+              type="button"
               className="category-btn"
-              onClick={() => setIsCategoryOpen(!isCategoryOpen)}
+              onClick={toggleCategories}
             >
               <TiThMenu />
+
               <p>Browse Category</p>
+
               <IoMdArrowDropdown />
-            </div>
+            </button>
 
             <div
               className={`category-nav-list ${
                 isCategoryOpen ? "active" : ""
               }`}
             >
-              {categories.map((category) => (
-                <Link
-                  key={category.slug}
-                  to={`/category/${category.slug}`}
-                  onClick={() => {
-                    setIsCategoryOpen(false);
-                    setIsMenuOpen(false);
-                  }}
-                >
-                  {category.name}
-                </Link>
-              ))}
+              {loading ? (
+                <div className="loading-category">
+                  Loading...
+                </div>
+              ) : (
+                categories.map((category) => (
+                  <Link
+                    key={category.slug}
+                    to={`/category/${category.slug}`}
+                    onClick={closeMenus}
+                  >
+                    {category.name}
+                  </Link>
+                ))
+              )}
             </div>
+
           </div>
 
-         
+          {/* Nav Links */}
 
           <ul className="nav-links">
             {navLinks.map((item) => (
@@ -97,7 +183,7 @@ function BtmHeader() {
               >
                 <Link
                   to={item.link}
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={closeMenus}
                 >
                   {item.title}
                 </Link>
@@ -105,42 +191,67 @@ function BtmHeader() {
             ))}
           </ul>
 
+          {/* Authentication */}
 
-        </nav>
-         
           <div className="auth-icons">
 
-  {user ? (
-    <>
-      <div className="user-info">
-        <HiOutlineUserCircle />
-        <span className="auth-title">{user.name}</span>
-      </div>
+            {user ? (
+              <>
+                <Link
+                  to="/profile"
+                  className="user-info"
+                  onClick={closeMenus}
+                >
+                  <HiOutlineUserCircle />
 
-      <button className="logout-btn" onClick={logout}>
-        <FiLogOut />
-        Logout
-      </button>
-    </>
-  ) : (
-    <>
-      <Link className="auth-link" to="/login">
-        <PiSignInBold />
-        <span className="auth-title">Login</span>
-      </Link>
+                  <span className="auth-title">
+                    Hi, {user?.name?.split(" ")[0]}
+                  </span>
+                </Link>
 
-      <Link className="auth-link register" to="/register">
-        <FaUserPlus />
-        <span className="auth-title">Register</span>
-      </Link>
-    </>
-  )}
+                <button
+                  type="button"
+                  className="logout-btn"
+                  onClick={handleLogout}
+                >
+                  <FiLogOut />
 
-</div>
+                  <span>Logout</span>
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  className="auth-link"
+                  to="/login"
+                  onClick={closeMenus}
+                >
+                  <PiSignInBold />
+
+                  <span className="auth-title">
+                    Login
+                  </span>
+                </Link>
+
+                <Link
+                  className="auth-link register"
+                  to="/register"
+                  onClick={closeMenus}
+                >
+                  <FaUserPlus />
+
+                  <span className="auth-title">
+                    Register
+                  </span>
+                </Link>
+              </>
+            )}
+
+          </div>
+
+        </nav>
 
       </div>
     </div>
   );
 }
-
-export default BtmHeader;

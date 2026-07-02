@@ -17,6 +17,10 @@ import AllProducts from "./pages/allProducts/AllProducts"
 import NotFound from "./pages/notFound/NotFound"
 import Login from "./pages/auth/login/Login";
 import Register from "./pages/auth/register/Register"
+import Checkout from './pages/checkout/Checkout';
+import ProtectedRoute from './component/auth/ProtectedRoute';
+import Orders from "./pages/orders/Orders";
+import Profile from "./pages/profiles/Profile";
 
 function App() {
 
@@ -46,9 +50,36 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="/login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route
+            path="/checkout"
+            element={
+              <ProtectedRoute>
+                <Checkout />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/order"
+            element={
+              <ProtectedRoute>
+                <Orders/>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+
+
+
         </Routes>
       </AnimatePresence>
-      <Footer/>
+      <Footer />
     </>
   )
 }
