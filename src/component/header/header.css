@@ -118,6 +118,128 @@ header {
   height: 40px;
   object-fit: contain;
 }
+/* ==========================
+        TABLET
+========================== */
+
+@media (max-width: 992px) {
+  .top-header .container {
+    gap: 20px;
+  }
+
+  .search-box-container {
+    max-width: 450px;
+  }
+
+  .top-header .logo img {
+    height: 65px;
+  }
+
+  .top-header .header-icons .icon svg {
+    font-size: 28px;
+  }
+}
+
+/* ==========================
+        MOBILE
+========================== */
+
+@media (max-width: 768px) {
+  header {
+    position: sticky;
+  }
+  .top-header {
+    padding: 10px 0;
+  }
+  .top-header .container {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "logo icons"
+      "search search";
+    align-items: center;
+    gap: 15px;
+  }
+  .top-header .logo {
+    grid-area: logo;
+  }
+  .top-header .header-icons {
+    grid-area: icons;
+    justify-self: end;
+  }
+  .search-box-container {
+    grid-area: search;
+    max-width: 100%;
+    width: 100%;
+  }
+  .top-header .logo img {
+    height: 55px;
+  }
+  .top-header .search-box {
+    width: 100%;
+  }
+  .top-header .search-box input {
+    height: 45px;
+    font-size: 15px;
+  }
+  .top-header .search-box button {
+    width: 55px;
+    height: 45px;
+  }
+  .top-header .header-icons {
+    gap: 18px;
+  }
+  .top-header .header-icons .icon svg {
+    font-size: 26px;
+  }
+  .top-header .count {
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+  }
+}
+
+/* ==========================
+      SMALL MOBILE
+========================== */
+
+@media (max-width: 480px) {
+  .top-header .container {
+    gap: 12px;
+  }
+  .top-header .logo img {
+    height: 45px;
+  }
+  .top-header .header-icons {
+    gap: 12px;
+  }
+  .top-header .header-icons .icon svg {
+    font-size: 23px;
+  }
+  .top-header .search-box {
+    border-radius: 30px;
+  }
+  .top-header .search-box input {
+    padding: 0 15px;
+    height: 42px;
+    font-size: 14px;
+  }
+  .top-header .search-box button {
+    width: 50px;
+    height: 42px;
+  }
+  .suggetions {
+    max-height: 250px;
+    overflow-y: auto;
+  }
+  .suggetions li {
+    padding: 8px;
+  }
+  .suggetions img {
+    width: 35px;
+    height: 35px;
+  }
+}
 
 /* =====================================================
                     BOTTOM HEADER
