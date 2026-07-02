@@ -50,14 +50,15 @@ export default function Checkout() {
       return;
     }
 
-    const order = {
-      id: Date.now(),
-      customer: formData,
-      items: cartItems,
-      total: totalPrice,
-      date: new Date().toLocaleString(),
-      status: "Pending",
-    };
+ const order = {
+  id: Date.now(),
+  userEmail: user.email,
+  customer: formData,
+  items: cartItems,
+  total: totalPrice,
+  date: new Date().toLocaleString(),
+  status: "Pending",
+};
 
     const orders =
       JSON.parse(localStorage.getItem("orders")) || [];
