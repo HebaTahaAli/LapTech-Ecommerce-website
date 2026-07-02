@@ -1,0 +1,34 @@
+.success-page{
+    padding:100px 0;
+    text-align:center;
+}
+
+.success-icon{
+    font-size:90px;
+    color:#16a34a;
+    margin-bottom:25px;
+}
+
+.success-page h1{
+    color:var(--main-color);
+    margin-bottom:20px;
+}
+
+.success-page p{
+    color:#666;
+    max-width:500px;
+    margin:auto;
+    line-height:1.8;
+}
+
+.success-btns{
+    margin-top:35px;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.home-btn{
+    background:#444;
+}

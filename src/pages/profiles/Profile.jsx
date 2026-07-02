@@ -1,26 +1,92 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import toast from "react-hot-toast";
+import "./profile.css";
+
 import { AuthProvider } from "../../component/context/AuthContext";
 
 export default function Profile() {
+  const { user, updateProfile } = useContext(AuthProvider);
 
-    const { user } = useContext(AuthProvider);
+  const [formData, setFormData] = useState({
+    name: user?.name || "",
+    email: user?.email || "",
+    password: user?.password || "",
+  });
 
-    return (
+  function handleChange(e) {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  }
 
-        <div className="container" style={{padding:"70px 0"}}>
+  function handleSubmit(e) {
+    e.preventDefault();
 
-            <h1>My Profile</h1>
+    if (
+      !formData.name.trim() ||
+      !formData.email.trim() ||
+      !formData.password.trim()
+    ) {
+      toast.error("Please fill all fields");
+      return;
+    }
 
-            <br/>
+    updateProfile(formData);
 
-            <h3>Name : {user.name}</h3>
+    toast.success("Profile Updated Successfully");
+  }
 
-            <br/>
+  return (
+    <section className="profile-page">
 
-            <h3>Email : {user.email}</h3>
+      <div className="container">
+
+        <div className="profile-box">
+
+          <h1>My Profile</h1>
+
+          <p>Manage your account information</p>
+
+          <form onSubmit={handleSubmit}>
+
+            <label>Full Name</label>
+
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+            />
+
+            <label>Email</label>
+
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+
+            <label>Password</label>
+
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+
+            <button className="btn">
+              Save Changes
+            </button>
+
+          </form>
 
         </div>
 
-    )
+      </div>
 
+    </section>
+  );
 }

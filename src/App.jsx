@@ -21,6 +21,8 @@ import Checkout from './pages/checkout/Checkout';
 import ProtectedRoute from './component/auth/ProtectedRoute';
 import Orders from "./pages/orders/Orders";
 import Profile from "./pages/profiles/Profile";
+import OrderSuccess from "./pages/orderSuccess/OrderSuccess";
+import PublicRoute from "./component/auth/PublicRoute"
 
 function App() {
 
@@ -48,8 +50,22 @@ function App() {
           <Route path="/products/:id" element={<ProductDetails />} />
           <Route path="/category/:category" element={<CategoryPage />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="register" element={<Register />} />
+          <Route
+            path="/login"
+            element={
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <PublicRoute>
+                <Register />
+              </PublicRoute>
+            }
+          />
           <Route
             path="/checkout"
             element={
@@ -59,10 +75,10 @@ function App() {
             }
           />
           <Route
-            path="/order"
+            path="/orders"
             element={
               <ProtectedRoute>
-                <Orders/>
+                <Orders />
               </ProtectedRoute>
             }
           />
@@ -71,6 +87,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/order-success"
+            element={
+              <ProtectedRoute>
+                <OrderSuccess />
               </ProtectedRoute>
             }
           />

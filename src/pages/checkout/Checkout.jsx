@@ -74,7 +74,7 @@ export default function Checkout() {
 
     toast.success("Order Placed Successfully");
 
-    navigate("/orders");
+    navigate("/order-success");
   }
 
   return (

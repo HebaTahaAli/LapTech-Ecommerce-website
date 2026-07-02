@@ -4,16 +4,18 @@ export const AuthProvider = createContext();
 
 export default function AuthContext({ children }) {
   const [user, setUser] = useState(null);
+const [loading, setLoading] = useState(true);
   const isAuthenticated = !!user;
- 
-  useEffect(() => {
-    const currentUser = JSON.parse(localStorage.getItem("user"));
 
-    if (currentUser) {
-      setUser(currentUser);
-    }
-  }, []);
+useEffect(() => {
+  const currentUser = JSON.parse(localStorage.getItem("user"));
 
+  if (currentUser) {
+    setUser(currentUser);
+  }
+
+  setLoading(false);
+}, []);
   // ================= Login =================
 
   const login = (email, password) => {
@@ -126,6 +128,7 @@ const updateProfile = (data) => {
         logout,
         updateProfile,
         isAuthenticated,
+        loading,
       }}
     >
       {children}

@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-
+import { IoChevronDown } from "react-icons/io5";
+import { FaRegUser } from "react-icons/fa";
+import { BsBoxSeam } from "react-icons/bs";
 import { TiThMenu } from "react-icons/ti";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
@@ -40,6 +42,7 @@ export default function BtmHeader() {
 
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
@@ -48,10 +51,9 @@ export default function BtmHeader() {
   // Close Menu After Navigation
   // ===============================
 
-  useEffect(() => {
-    setIsMenuOpen(false);
-    setIsCategoryOpen(false);
-  }, [location]);
+useEffect(() => {
+  closeMenus();
+}, [location]);
 
   // ===============================
   // Fetch Categories
@@ -81,11 +83,11 @@ export default function BtmHeader() {
   // Functions
   // ===============================
 
-  function closeMenus() {
-    setIsMenuOpen(false);
-    setIsCategoryOpen(false);
-  }
-
+function closeMenus() {
+  setIsMenuOpen(false);
+  setIsCategoryOpen(false);
+  setIsProfileOpen(false);
+}
   function toggleMenu() {
     setIsMenuOpen((prev) => !prev);
   }
@@ -193,61 +195,100 @@ export default function BtmHeader() {
 
           {/* Authentication */}
 
-          <div className="auth-icons">
+         {/* Authentication */}
 
-            {user ? (
-              <>
-                <Link
-                  to="/profile"
-                  className="user-info"
-                  onClick={closeMenus}
-                >
-                  <HiOutlineUserCircle />
+<div className="auth-icons">
 
-                  <span className="auth-title">
-                    Hi, {user?.name?.split(" ")[0]}
-                  </span>
-                </Link>
+  {user ? (
 
-                <button
-                  type="button"
-                  className="logout-btn"
-                  onClick={handleLogout}
-                >
-                  <FiLogOut />
+    <div className="profile-dropdown">
 
-                  <span>Logout</span>
-                </button>
-              </>
-            ) : (
-              <>
-                <Link
-                  className="auth-link"
-                  to="/login"
-                  onClick={closeMenus}
-                >
-                  <PiSignInBold />
+      <button
+        type="button"
+        className="profile-btn"
+        onClick={() =>
+          setIsProfileOpen(!isProfileOpen)
+        }
+      >
+        <HiOutlineUserCircle />
 
-                  <span className="auth-title">
-                    Login
-                  </span>
-                </Link>
+        <span className="user-name">
+          {user?.name?.split(" ")[0]}
+        </span>
 
-                <Link
-                  className="auth-link register"
-                  to="/register"
-                  onClick={closeMenus}
-                >
-                  <FaUserPlus />
+        <IoChevronDown />
+      </button>
 
-                  <span className="auth-title">
-                    Register
-                  </span>
-                </Link>
-              </>
-            )}
+      <div
+        className={`profile-menu ${
+          isProfileOpen ? "active" : ""
+        }`}
+      >
 
-          </div>
+        <Link
+          to="/profile"
+          onClick={closeMenus}
+        >
+          <FaRegUser />
+
+          My Profile
+        </Link>
+
+        <Link
+          to="/orders"
+          onClick={closeMenus}
+        >
+          <BsBoxSeam />
+
+          My Orders
+        </Link>
+
+        <button
+          type="button"
+          onClick={handleLogout}
+        >
+          <FiLogOut />
+
+          Logout
+        </button>
+
+      </div>
+
+    </div>
+
+  ) : (
+
+    <>
+
+      <Link
+        className="auth-link"
+        to="/login"
+        onClick={closeMenus}
+      >
+        <PiSignInBold />
+
+        <span className="auth-title">
+          Login
+        </span>
+      </Link>
+
+      <Link
+        className="auth-link register"
+        to="/register"
+        onClick={closeMenus}
+      >
+        <FaUserPlus />
+
+        <span className="auth-title">
+          Register
+        </span>
+      </Link>
+
+    </>
+
+  )}
+
+</div>
 
         </nav>
 
